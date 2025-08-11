@@ -1,0 +1,1067 @@
+;############################################################
+;# -- INTERNATIONAL GAMING CENTER NETWORK
+;# -- www.igcn.mu
+;# -- (C) 2019 IGC-Network (R)
+;# ---------------------------------------------------------
+;# -- File is a part of IGCN Group MuOnline Server files.
+;############################################################
+
+; For more CaclCharacter Options refer to \Data\Scripts\Character\CalcCharacter.lua
+; Divisor, Multiplier - values of float type (up to 6 characters), e.g. 1000.0 or 1.0000
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Additional settings available from MuOnline.dbo.DefaultClassType table
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Allowing to adjust amount of Life and Mana increased per level, vitality and energy point
+;-- Settings per Character Class:
+;--	1) Column: [LevelLife] - Life amount per level - multiplier
+;--	2) Column: [LevelMana] - Mana amount per level - multiplier
+;--	3) Column: [VitalityToLife] - Life amount per Vitality Point - multiplier
+;--	4) Column: [EnergyToMana] - Mana amount per Energy Point - multiplier
+;----------------------------------------------------------------------------------------------~~~~~~
+
+[General]
+;-------------------------------------------------------------------------------------------------------------~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;-- Do not add master level in character statistics window (C), 0/1
+;-- If set to 1 then then game client, will not display total level as sum of regular and master level.
+;-- In such case it will not count master level in calculations of warp/item and other requirements.
+;-- A modification of max warp/item required level is then necessary in all files related, from 800 to 400.
+;-- The option is directed to servers with reset system enabled where level requirements after reset may fall in conflict in numerous places.
+;-------------------------------------------------------------------------------------------------------------~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NotAddMasterLevelToLevel = 0
+	
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Maximum stat point character may gain poer stat type, max 65535 - to avoid going over
+;-- a limit by e.g. applying buff, it is recommended to set max stats to a bit lower
+;----------------------------------------------------------------------------------------------~~~~~~
+MaxStrength = 32767
+MaxAgility = 32767
+MaxVitality = 32767
+MaxEnergy = 32767
+MaxCommand = 32767
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Count of free stat points per level per character class, changes do affect applied stats
+;----------------------------------------------------------------------------------------------~~~~~~
+DKLevelUpPoint = 5
+DWLevelUpPoint = 5
+ELFLevelUpPoint = 5
+MGLevelUpPoint = 7
+DLLevelUpPoint = 7
+SULevelUpPoint = 5
+RFLevelUpPoint = 7
+GLLevelUpPoint = 7
+RWLevelUpPoint = 5
+SLALevelUpPoint = 5				   
+GCLevelUpPoint = 5			
+LWLevelUpPoint = 5
+LMLevelUpPoint = 5
+IKLevelUpPoint = 5
+ACLevelUpPoint = 5
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Third Skill Tree point per level per character class, changes do affect applied stats
+;----------------------------------------------------------------------------------------------~~~~~~
+DWLevelUp3rdTreePoint = 1
+DKLevelUp3rdTreePoint = 1
+ELFLevelUp3rdTreePoint = 1
+MGLevelUp3rdTreePoint = 1
+DLLevelUp3rdTreePoint = 1
+SULevelUp3rdTreePoint = 1
+RFLevelUp3rdTreePoint = 1
+GLLevelUp3rdTreePoint = 1
+RWLevelUp3rdTreePoint = 1
+SLALevelUp3rdTreePoint = 1						  
+GCLevelUp3rdTreePoint = 1		
+LWLevelUp3rdTreePoint = 1
+LMLevelUp3rdTreePoint = 1
+IKLevelUp3rdTreePoint = 1
+ACLevelUp3rdTreePoint = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Fourth Skill Tree point per level per character class, changes do affect applied stats
+;----------------------------------------------------------------------------------------------~~~~~~
+DWLevelUp4thTreePoint = 1
+DKLevelUp4thTreePoint = 1
+ELFLevelUp4thTreePoint = 1
+MGLevelUp4thTreePoint = 1
+DLLevelUp4thTreePoint = 1
+SULevelUp4thTreePoint = 1
+RFLevelUp4thTreePoint = 1
+GLLevelUp4thTreePoint = 1
+RWLevelUp4thTreePoint = 1
+SLALevelUp4thTreePoint = 1						  
+GCLevelUp4thTreePoint = 1		
+LWLevelUp4thTreePoint = 1
+LMLevelUp4thTreePoint = 1
+IKLevelUp4thTreePoint = 1
+ACLevelUp4thTreePoint = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Defines maximum attack speed per character class
+;----------------------------------------------------------------------------------------------~~~~~~
+DWMaxAttackSpeed = 284
+DKMaxAttackSpeed = 288
+ELFMaxAttackSpeed = 275
+MGMaxAttackSpeed = 300
+DLMaxAttackSpeed = 290
+SUMaxAttackSpeed = 320
+RFMaxAttackSpeed = 401
+GLMaxAttackSpeed = 273
+RWMaxAttackSpeed = 274
+SLAMaxAttackSpeed = 384					   
+GCMaxAttackSpeed = 280				
+LWMaxAttackSpeed = 304
+LMMaxAttackSpeed = 290
+IKMaxAttackSpeed = 350
+ACMaxAttackSpeed = 329
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Extra HP Regeneration, 1 HP for first 10-15 sec, 5 HP between 15-25 sec, 10 HP above 25 sec
+;----------------------------------------------------------------------------------------------~~~~~~
+UseCharacterAutoRecuperation = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Maximum character level to use AutoRecuperation
+;----------------------------------------------------------------------------------------------~~~~~~
+CharacterRecuperationMaxLevel = 100
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Ability to disable stun on reflect damage, applies to mace weapons with mace mastery skill, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+NotApplyStunOnReflectDamage = 0
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- If enabled, increases 1 DMG every 10 levels, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+EnableLevelBasedDmg = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- If enabled, the option considers bonus damage to be reduced from defense, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+ReduceDefenseFromFullDamage = 0
+
+;----------------------------------------------------------------------------------------------------
+;-- If enabled, Max Basic (Perfect) Defense is limited by value of character's defense
+;-- Disabling the option will affect existing characters balance
+;----------------------------------------------------------------------------------------------------
+SteelArmorLimitByDefense = 1
+
+[ShieldGage]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Determines whether activate or deactivate character shield gage system, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+ShieldSystem = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- A divider for damage impact on the Shield Gage
+;-- General formula: ReduceShield = AttackDamage * (DamageDevideToSD - JOHOptionDecreaseSDRate + JOHOptionAddSDRate) / 100
+;----------------------------------------------------------------------------------------------~~~~~~
+DWDamageDevideToSD = 90
+DKDamageDevideToSD = 90
+ELFDamageDevideToSD = 90
+MGDamageDevideToSD = 90
+DLDamageDevideToSD = 90
+SUDamageDevideToSD = 90
+RFDamageDevideToSD = 90
+GLDamageDevideToSD = 90
+RWDamageDevideToSD = 90
+SLADamageDevideToSD = 90
+GCDamageDevideToSD = 90					   
+LWDamageDevideToSD = 90
+LMDamageDevideToSD = 90
+IKDamageDevideToSD = 90
+ACDamageDevideToSD = 90
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- AttackLevel = AttackerLevel + AttackerMasterLevel
+;-- DefenseLevel = TargetLevel + TargetMasterLevel
+;--
+;-- ExpressionA = ((AttackRate * 10000) / (AttackRate + DefenseRate)) / 10000
+;-- ExpressionB = ((AttackLevel * 10000) / (AttackLevel + DefenseLevel)) / 10000
+;--
+;-- AttackSuccessRate = 100 * ExpressionA * (SuccessAttackRateOption / 10000) * ExpressionB
+;----------------------------------------------------------------------------------------------~~~~~~
+DWSuccessAttackRateOption = 27000
+DKSuccessAttackRateOption = 27000
+ELFSuccessAttackRateOption = 27000
+MGSuccessAttackRateOption = 27000
+DLSuccessAttackRateOption = 27000
+SUSuccessAttackRateOption = 27000
+RFSuccessAttackRateOption = 27000
+GLSuccessAttackRateOption = 27000
+RWSuccessAttackRateOption = 27000
+SLASuccessAttackRateOption = 27000
+GCSuccessAttackRateOption = 27000								 
+LWSuccessAttackRateOption = 27000
+LMSuccessAttackRateOption = 27000
+IKSuccessAttackRateOption = 27000
+ACSuccessAttackRateOption = 27000
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Determines whether Shield Gage should auto refill outside Safe Zone within time or not, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+ShieldAutoRefill = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Determines whether Shield Gage should auto refill in Safe Zone only within time or not, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+ShieldAutoRefillOnSafeZoneOnly = 1
+
+ShieldComboMissOption = 0
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Constant values used across different formulas
+;-- General formulas: ExpressionA = Strength + Dexterity + Vitality + Energy + Command
+;--					  ExpressionB = (Level * Level) / ShieldGageConstB
+;-- MaxShieldPoint = (ExpressionA * ShieldGageConstA) / 10 + ExpressionB + Defense
+;----------------------------------------------------------------------------------------------~~~~~~
+DWShieldGageConstA = 24
+DKShieldGageConstA = 24
+ELFShieldGageConstA = 24
+MGShieldGageConstA = 24
+DLShieldGageConstA = 12
+SUShieldGageConstA = 24
+RFShieldGageConstA = 24
+GLShieldGageConstA = 24
+RWShieldGageConstA = 24
+SLAShieldGageConstA = 24
+GCShieldGageConstA = 24					   
+LWShieldGageConstA = 23
+LMShieldGageConstA = 23
+IKShieldGageConstA = 24
+ACShieldGageConstA = 24
+
+DWShieldGageConstB = 9
+DKShieldGageConstB = 9
+ELFShieldGageConstB = 9
+MGShieldGageConstB = 9
+DLShieldGageConstB = 6
+SUShieldGageConstB = 9
+RFShieldGageConstB = 9
+GLShieldGageConstB = 9
+RWShieldGageConstB = 9
+SLAShieldGageConstB = 9					   
+GCShieldGageConstB = 9		
+LWShieldGageConstB = 9
+LMShieldGageConstB = 9
+IKShieldGageConstB = 9
+ACShieldGageConstB = 9
+
+[DLPets]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- DarkHorseDamageDivisor: addskilldamage = addskilldamage * DarkHorseDmgMultiplier / 100.0
+;-- DarkRavenDamageDivisor: AttackDamage = AttackDamage * DarkRavenDamageMultiplier / 100.0
+;----------------------------------------------------------------------------------------------~~~~~~
+DarkHorseDamageMultiplier = 100.0
+DarkRavenDamageMultiplier = 100.0
+
+[DarkSpirit]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final (PvM) damage done by Dark Spirit so should be
+;-- configured as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, PvMDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+PvMDamageRate = 200
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final (PvP) damage done by Dark Spirit so should be
+;-- configured as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XX_PvPDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+DLToDW_PvPDamageRate = 50
+DLToDK_PvPDamageRate = 50
+DLToELF_PvPDamageRate = 50
+DLToMG_PvPDamageRate = 50
+DLToDL_PvPDamageRate = 50
+DLToSU_PvPDamageRate = 50
+DLToRF_PvPDamageRate = 50
+DLToGL_PvPDamageRate = 50
+DLToRW_PvPDamageRate = 50
+DLToSLA_PvPDamageRate = 50						   
+DLToGC_PvPDamageRate = 50		
+DLToLW_PvPDamageRate = 50
+DLToLM_PvPDamageRate = 50
+DLToIK_PvPDamageRate = 50
+DLToAC_PvPDamageRate = 50
+
+[PvPDamage]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final (PvP) damage so should be configured as last, after
+;-- the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XX_PvPDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;-- Razas Meele que no son DK +5% bonus contra razas a distancia
+;----------------------------------------------------------------------------------------------~~~~~~
+
+DWToDW_PvPDamageRate = 22
+DWToDK_PvPDamageRate = 28
+DWToELF_PvPDamageRate = 26.1
+DWToMG_PvPDamageRate = 28.3
+DWToDL_PvPDamageRate = 28.5
+DWToSU_PvPDamageRate = 28
+DWToRF_PvPDamageRate = 26.2
+DWToGL_PvPDamageRate = 28
+DWToRW_PvPDamageRate = 27
+DWToSLA_PvPDamageRate = 27			   
+DWToGC_PvPDamageRate = 29
+DWToLW_PvPDamageRate = 27
+DWToLM_PvPDamageRate = 28
+DWToIK_PvPDamageRate = 26
+DWToAC_PvPDamageRate = 25.5
+
+DKToDW_PvPDamageRate = 13.1
+DKToDK_PvPDamageRate = 11.2
+DKToELF_PvPDamageRate = 11.7
+DKToMG_PvPDamageRate = 11.8
+DKToDL_PvPDamageRate = 11.8
+DKToSU_PvPDamageRate = 11.6
+DKToRF_PvPDamageRate = 11.4
+DKToGL_PvPDamageRate = 11.5
+DKToRW_PvPDamageRate = 11.7
+DKToSLA_PvPDamageRate = 11.3		   
+DKToGC_PvPDamageRate = 11.6	
+DKToLW_PvPDamageRate = 11.6
+DKToLM_PvPDamageRate = 11.6
+DKToIK_PvPDamageRate = 11.6
+DKToAC_PvPDamageRate = 10.8
+
+ELFToDW_PvPDamageRate = 73
+ELFToDK_PvPDamageRate = 60
+ELFToELF_PvPDamageRate = 50.4
+ELFToMG_PvPDamageRate = 67
+ELFToDL_PvPDamageRate = 69.8
+ELFToSU_PvPDamageRate = 62
+ELFToRF_PvPDamageRate = 60.4
+ELFToGL_PvPDamageRate = 63
+ELFToRW_PvPDamageRate = 67.8
+ELFToSLA_PvPDamageRate = 55			
+ELFToGC_PvPDamageRate = 63			   
+ELFToLW_PvPDamageRate = 61
+ELFToLM_PvPDamageRate = 74
+ELFToIK_PvPDamageRate = 65
+ELFToAC_PvPDamageRate = 45
+
+MGToDW_PvPDamageRate = 23
+MGToDK_PvPDamageRate = 19.7
+MGToELF_PvPDamageRate = 20
+MGToMG_PvPDamageRate = 27
+MGToDL_PvPDamageRate = 20
+MGToSU_PvPDamageRate = 19.8
+MGToRF_PvPDamageRate = 20
+MGToGL_PvPDamageRate = 19.4
+MGToRW_PvPDamageRate = 19.5
+MGToSLA_PvPDamageRate = 18		   
+MGToGC_PvPDamageRate = 19.4
+MGToLW_PvPDamageRate = 19.8
+MGToLM_PvPDamageRate = 20
+MGToIK_PvPDamageRate = 19
+MGToAC_PvPDamageRate = 18
+
+DLToDW_PvPDamageRate = 77.2
+DLToDK_PvPDamageRate = 64.8
+DLToELF_PvPDamageRate = 60.5
+DLToMG_PvPDamageRate = 66.2
+DLToDL_PvPDamageRate = 69
+DLToSU_PvPDamageRate = 64.4
+DLToRF_PvPDamageRate = 58.5
+DLToGL_PvPDamageRate = 63.1
+DLToRW_PvPDamageRate = 68.4
+DLToSLA_PvPDamageRate = 55.9
+DLToGC_PvPDamageRate = 65
+DLToLW_PvPDamageRate = 64.4
+DLToLM_PvPDamageRate = 76.5
+DLToIK_PvPDamageRate = 63.7
+DLToAC_PvPDamageRate = 39
+
+SUToDW_PvPDamageRate = 36.3
+SUToDK_PvPDamageRate = 31.5   
+SUToELF_PvPDamageRate = 29.5
+SUToMG_PvPDamageRate = 31.5
+SUToDL_PvPDamageRate = 33
+SUToSU_PvPDamageRate = 30
+SUToRF_PvPDamageRate = 29.4
+SUToGL_PvPDamageRate = 31.4
+SUToRW_PvPDamageRate = 33
+SUToSLA_PvPDamageRate = 31		
+SUToGC_PvPDamageRate = 30
+SUToLW_PvPDamageRate = 30
+SUToLM_PvPDamageRate = 33
+SUToIK_PvPDamageRate = 31.6
+SUToAC_PvPDamageRate = 28
+
+RFToDW_PvPDamageRate = 21.8
+RFToDK_PvPDamageRate = 18.8
+RFToELF_PvPDamageRate = 19
+RFToMG_PvPDamageRate = 19.4
+RFToDL_PvPDamageRate = 19.4
+RFToSU_PvPDamageRate = 19.6
+RFToRF_PvPDamageRate = 11
+RFToGL_PvPDamageRate = 19
+RFToRW_PvPDamageRate = 19
+RFToSLA_PvPDamageRate = 18.2
+RFToGC_PvPDamageRate = 18.8
+RFToLW_PvPDamageRate = 22.7
+RFToLM_PvPDamageRate = 19.6
+RFToIK_PvPDamageRate = 19
+RFToAC_PvPDamageRate = 18.3
+			   
+GLToDW_PvPDamageRate = 43
+GLToDK_PvPDamageRate = 40
+GLToELF_PvPDamageRate = 38.5
+GLToMG_PvPDamageRate = 38.4
+GLToDL_PvPDamageRate = 40
+GLToSU_PvPDamageRate = 38
+GLToRF_PvPDamageRate = 39.7
+GLToGL_PvPDamageRate = 24
+GLToRW_PvPDamageRate = 38
+GLToSLA_PvPDamageRate = 37.4
+GLToGC_PvPDamageRate = 38.3
+GLToLW_PvPDamageRate = 39
+GLToLM_PvPDamageRate = 39.6
+GLToIK_PvPDamageRate = 40.2
+GLToAC_PvPDamageRate = 36
+
+RWToDW_PvPDamageRate = 55.4
+RWToDK_PvPDamageRate = 39.7
+RWToELF_PvPDamageRate = 42.5
+RWToMG_PvPDamageRate = 41
+RWToDL_PvPDamageRate = 42
+RWToSU_PvPDamageRate = 42
+RWToRF_PvPDamageRate = 39
+RWToGL_PvPDamageRate = 40
+RWToRW_PvPDamageRate = 25
+RWToSLA_PvPDamageRate = 38.5				   
+RWToGC_PvPDamageRate = 43
+RWToLW_PvPDamageRate = 40
+RWToLM_PvPDamageRate = 42
+RWToIK_PvPDamageRate = 37.8
+RWToAC_PvPDamageRate = 36.3
+
+SLAToDW_PvPDamageRate = 61.5
+SLAToDK_PvPDamageRate = 54.8
+SLAToELF_PvPDamageRate = 56
+SLAToMG_PvPDamageRate = 55.6
+SLAToDL_PvPDamageRate = 57
+SLAToSU_PvPDamageRate = 54.8
+SLAToRF_PvPDamageRate = 54
+SLAToGL_PvPDamageRate = 56.3
+SLAToRW_PvPDamageRate = 60
+SLAToSLA_PvPDamageRate = 50
+SLAToGC_PvPDamageRate = 55
+SLAToLW_PvPDamageRate = 56
+SLAToLM_PvPDamageRate = 56.3
+SLAToIK_PvPDamageRate = 54.6
+SLAToAC_PvPDamageRate = 52
+
+GCToDW_PvPDamageRate = 11
+GCToDK_PvPDamageRate = 10
+GCToELF_PvPDamageRate = 10
+GCToMG_PvPDamageRate = 9.6
+GCToDL_PvPDamageRate = 9.4
+GCToSU_PvPDamageRate = 9.6
+GCToRF_PvPDamageRate = 9.4
+GCToGL_PvPDamageRate = 9.6
+GCToRW_PvPDamageRate = 9.6
+GCToSLA_PvPDamageRate = 9.9
+GCToGC_PvPDamageRate = 14	
+GCToLW_PvPDamageRate = 9.4
+GCToLM_PvPDamageRate = 10
+GCToIK_PvPDamageRate = 9.5
+GCToAC_PvPDamageRate = 9.3
+
+LWToDW_PvPDamageRate = 7.1
+LWToDK_PvPDamageRate = 6
+LWToELF_PvPDamageRate = 5.9
+LWToMG_PvPDamageRate = 6
+LWToDL_PvPDamageRate = 6
+LWToSU_PvPDamageRate = 6
+LWToRF_PvPDamageRate = 5.8
+LWToGL_PvPDamageRate = 6
+LWToRW_PvPDamageRate = 6.3
+LWToSLA_PvPDamageRate = 6
+LWToGC_PvPDamageRate = 6
+LWToLW_PvPDamageRate = 12
+LWToLM_PvPDamageRate = 6
+LWToIK_PvPDamageRate = 5.9
+LWToAC_PvPDamageRate = 6.1
+
+LMToDW_PvPDamageRate = 14.7
+LMToDK_PvPDamageRate = 13
+LMToELF_PvPDamageRate = 13
+LMToMG_PvPDamageRate = 13
+LMToDL_PvPDamageRate = 13.3
+LMToSU_PvPDamageRate = 13
+LMToRF_PvPDamageRate = 12.8
+LMToGL_PvPDamageRate = 13
+LMToRW_PvPDamageRate = 13.3
+LMToSLA_PvPDamageRate = 12.7
+LMToGC_PvPDamageRate = 13.2
+LMToLW_PvPDamageRate = 13
+LMToLM_PvPDamageRate = 16
+LMToIK_PvPDamageRate = 13
+LMToAC_PvPDamageRate = 12.2
+
+IKToDW_PvPDamageRate = 139
+IKToDK_PvPDamageRate = 115
+IKToELF_PvPDamageRate = 126.8
+IKToMG_PvPDamageRate = 134
+IKToDL_PvPDamageRate = 141
+IKToSU_PvPDamageRate = 113
+IKToRF_PvPDamageRate = 97.5
+IKToGL_PvPDamageRate = 109.1
+IKToRW_PvPDamageRate = 127
+IKToSLA_PvPDamageRate = 89.1
+IKToGC_PvPDamageRate = 116.6
+IKToLW_PvPDamageRate = 112.9
+IKToLM_PvPDamageRate = 157.3
+IKToIK_PvPDamageRate = 85
+IKToAC_PvPDamageRate = 62.7
+
+ACToDW_PvPDamageRate = 22
+ACToDK_PvPDamageRate = 21.4
+ACToELF_PvPDamageRate = 22.2
+ACToMG_PvPDamageRate = 22.3
+ACToDL_PvPDamageRate = 22.3
+ACToSU_PvPDamageRate = 21.4
+ACToRF_PvPDamageRate = 20.8
+ACToGL_PvPDamageRate = 21.3
+ACToRW_PvPDamageRate = 22
+ACToSLA_PvPDamageRate = 20.4
+ACToGC_PvPDamageRate = 21.6
+ACToLW_PvPDamageRate = 21.7
+ACToLM_PvPDamageRate = 23
+ACToIK_PvPDamageRate = 21.4
+ACToAC_PvPDamageRate = 23
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Chance rate for character Stuck upon receiving damage in PvP (per class), 1-100
+;----------------------------------------------------------------------------------------------~~~~~~
+DKDamageStuckRate = 2
+DWDamageStuckRate = 2
+ELFDamageStuckRate = 2
+MGDamageStuckRate = 2
+DLDamageStuckRate = 2
+SUDamageStuckRate = 2
+RFDamageStuckRate = 2
+GLDamageStuckRate = 2
+RWDamageStuckRate = 2
+SLADamageStuckRate = 2					   
+GCDamageStuckRate = 2					  
+LWDamageStuckRate = 2
+LMDamageStuckRate = 2
+IKDamageStuckRate = 2
+ACDamageStuckRate = 25
+
+[PvMDamage]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final (PvM) damage so should be configured as last, after
+;-- the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XXPvMDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values) 105
+;----------------------------------------------------------------------------------------------~~~~~~
+DWPvMDamageRate = 140
+DKPvMDamageRate = 130
+ELFPvMDamageRate = 240
+MGPvMDamageRate = 120
+DLPvMDamageRate = 90
+SUPvMDamageRate = 150
+RFPvMDamageRate = 120
+GLPvMDamageRate = 150
+RWPvMDamageRate = 320
+SLAPvMDamageRate = 270
+GCPvMDamageRate = 42
+LWPvMDamageRate = 40
+LMPvMDamageRate = 50		
+IKPvMDamageRate = 160
+ACPvMDamageRate = 60
+
+[Elemental]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- 0: Elemental Damage cause impact on HP despite lack of SD (custom)
+;-- 1: Elemental Damage does not cause impact on HP when SD is used (original)
+;----------------------------------------------------------------------------------------------~~~~~~
+ElementalDmgAffectSDOnly = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Control of Pentagram Punish option against PvP, disable or enable, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+PentagramPunishPvP = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Control of Pentagram Punish option against PvM, disable or enable, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+PentagramPunishPvM = 1
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Maximum punish damage cap for PvP and PvM
+;----------------------------------------------------------------------------------------------~~~~~~
+PunishMaxDamagePvP = 30000
+PunishMaxDamagePvM = 300000																							 
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final Elemental (PvP) damage of specified element type, so should
+;-- be configured as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XX_PvPDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+FireToFire_PvPDamageRate = 120
+FireToWater_PvPDamageRate = 120
+FireToEarth_PvPDamageRate = 120
+FireToWind_PvPDamageRate = 120
+FireToDarkness_PvPDamageRate = 120
+FireToNoElement_PvPDamageRate = 143
+
+WaterToFire_PvPDamageRate = 120
+WaterToWater_PvPDamageRate = 120
+WaterToEarth_PvPDamageRate = 120
+WaterToWind_PvPDamageRate = 120
+WaterToDarkness_PvPDamageRate = 120
+WaterToNoElement_PvPDamageRate = 143
+
+EarthToFire_PvPDamageRate = 120
+EarthToWater_PvPDamageRate = 120
+EarthToEarth_PvPDamageRate = 120
+EarthToWind_PvPDamageRate = 120
+EarthToDarkness_PvPDamageRate = 120
+EarthToNoElement_PvPDamageRate = 143
+
+WindToFire_PvPDamageRate = 120
+WindToWater_PvPDamageRate = 120
+WindToEarth_PvPDamageRate = 120
+WindToWind_PvPDamageRate = 120
+WindToDarkness_PvPDamageRate = 120
+WindToNoElement_PvPDamageRate = 143
+
+DarknessToFire_PvPDamageRate = 120
+DarknessToWater_PvPDamageRate = 120
+DarknessToEarth_PvPDamageRate = 120
+DarknessToWind_PvPDamageRate = 120
+DarknessToDarkness_PvPDamageRate = 120
+DarknessToNoElement_PvPDamageRate = 143
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final Elemental (PvM) damage of specified element type, so should
+;-- be configured as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XX_PvMDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+FireToFire_PvMDamageRate = 100
+FireToWater_PvMDamageRate = 90
+FireToEarth_PvMDamageRate = 95
+FireToWind_PvMDamageRate = 105
+FireToDarkness_PvMDamageRate = 110
+FireToNoElement_PvMDamageRate = 100
+
+WaterToFire_PvMDamageRate = 110
+WaterToWater_PvMDamageRate = 100
+WaterToEarth_PvMDamageRate = 90
+WaterToWind_PvMDamageRate = 95
+WaterToDarkness_PvMDamageRate = 105
+WaterToNoElement_PvMDamageRate = 100
+
+EarthToFire_PvMDamageRate = 105
+EarthToWater_PvMDamageRate = 110
+EarthToEarth_PvMDamageRate = 100
+EarthToWind_PvMDamageRate = 90
+EarthToDarkness_PvMDamageRate = 95
+EarthToNoElement_PvMDamageRate = 100
+
+WindToFire_PvMDamageRate = 95
+WindToWater_PvMDamageRate = 105
+WindToEarth_PvMDamageRate = 110
+WindToWind_PvMDamageRate = 100
+WindToDarkness_PvMDamageRate = 90
+WindToNoElement_PvMDamageRate = 100
+
+DarknessToFire_PvMDamageRate = 90
+DarknessToWater_PvMDamageRate = 95
+DarknessToEarth_PvMDamageRate = 105
+DarknessToWind_PvMDamageRate = 110
+DarknessToDarkness_PvMDamageRate = 100
+DarknessToNoElement_PvMDamageRate = 100
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final Elemental (MvP) damage of specified element type, so should
+;-- be configured as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XX_MvPDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+FireToNoElement_MvPDamageRate = 110
+WaterToNoElement_MvPDamageRate = 110
+EarthToNoElement_MvPDamageRate = 110
+WindToNoElement_MvPDamageRate = 110
+DarknessToNoElement_MvPDamageRate = 110
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final Elemental (PvP) damage so should be configured
+;-- as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XX_PvPDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+DWToDW_PvPDamageRate = 32
+DWToDK_PvPDamageRate = 34
+DWToELF_PvPDamageRate = 42
+DWToMG_PvPDamageRate = 31
+DWToDL_PvPDamageRate = 35
+DWToSU_PvPDamageRate = 32
+DWToRF_PvPDamageRate = 40
+DWToGL_PvPDamageRate = 33
+DWToRW_PvPDamageRate = 30
+DWToSLA_PvPDamageRate = 41					   
+DWToGC_PvPDamageRate = 39
+DWToLW_PvPDamageRate = 30
+DWToLM_PvPDamageRate = 31
+DWToIK_PvPDamageRate = 32
+DWToAC_PvPDamageRate = 31
+
+DKToDW_PvPDamageRate = 30
+DKToDK_PvPDamageRate = 33
+DKToELF_PvPDamageRate = 37
+DKToMG_PvPDamageRate = 30
+DKToDL_PvPDamageRate = 33
+DKToSU_PvPDamageRate = 31
+DKToRF_PvPDamageRate = 39
+DKToGL_PvPDamageRate = 33
+DKToRW_PvPDamageRate = 31
+DKToSLA_PvPDamageRate = 41
+DKToGC_PvPDamageRate = 39
+DKToLW_PvPDamageRate = 30
+DKToLM_PvPDamageRate = 30
+DKToIK_PvPDamageRate = 32
+DKToAC_PvPDamageRate = 31
+
+ELFToDW_PvPDamageRate = 27
+ELFToDK_PvPDamageRate = 29
+ELFToELF_PvPDamageRate = 29
+ELFToMG_PvPDamageRate = 27
+ELFToDL_PvPDamageRate = 31
+ELFToSU_PvPDamageRate = 28
+ELFToRF_PvPDamageRate = 28
+ELFToGL_PvPDamageRate = 30
+ELFToRW_PvPDamageRate = 28
+ELFToSLA_PvPDamageRate = 30
+ELFToGC_PvPDamageRate = 27
+ELFToLW_PvPDamageRate = 27
+ELFToLM_PvPDamageRate = 27
+ELFToIK_PvPDamageRate = 29
+ELFToAC_PvPDamageRate = 28
+
+MGToDW_PvPDamageRate = 29
+MGToDK_PvPDamageRate = 35
+MGToELF_PvPDamageRate = 45
+MGToMG_PvPDamageRate = 43
+MGToDL_PvPDamageRate = 37
+MGToSU_PvPDamageRate = 33
+MGToRF_PvPDamageRate = 42
+MGToGL_PvPDamageRate = 35
+MGToRW_PvPDamageRate = 33
+MGToSLA_PvPDamageRate = 44					   
+MGToGC_PvPDamageRate = 42						  
+MGToLW_PvPDamageRate = 32
+MGToLM_PvPDamageRate = 34
+MGToIK_PvPDamageRate = 34
+MGToAC_PvPDamageRate = 33
+
+DLToDW_PvPDamageRate = 32
+DLToDK_PvPDamageRate = 34
+DLToELF_PvPDamageRate = 38
+DLToMG_PvPDamageRate = 31
+DLToDL_PvPDamageRate = 33
+DLToSU_PvPDamageRate = 32
+DLToRF_PvPDamageRate = 41
+DLToGL_PvPDamageRate = 34
+DLToRW_PvPDamageRate = 32
+DLToSLA_PvPDamageRate = 43
+DLToGC_PvPDamageRate = 41
+DLToLW_PvPDamageRate = 31
+DLToLM_PvPDamageRate = 32
+DLToIK_PvPDamageRate = 33
+DLToAC_PvPDamageRate = 32
+
+SUToDW_PvPDamageRate = 30
+SUToDK_PvPDamageRate = 33
+SUToELF_PvPDamageRate = 38
+SUToMG_PvPDamageRate = 30
+SUToDL_PvPDamageRate = 34
+SUToSU_PvPDamageRate = 30
+SUToRF_PvPDamageRate = 39
+SUToGL_PvPDamageRate = 32
+SUToRW_PvPDamageRate = 31
+SUToSLA_PvPDamageRate = 41
+SUToGC_PvPDamageRate = 38
+SUToLW_PvPDamageRate = 30
+SUToLM_PvPDamageRate = 30
+SUToIK_PvPDamageRate = 31
+SUToAC_PvPDamageRate = 31
+
+RFToDW_PvPDamageRate = 40
+RFToDK_PvPDamageRate = 42
+RFToELF_PvPDamageRate = 55
+RFToMG_PvPDamageRate = 40
+RFToDL_PvPDamageRate = 45
+RFToSU_PvPDamageRate = 41
+RFToRF_PvPDamageRate = 51
+RFToGL_PvPDamageRate = 43
+RFToRW_PvPDamageRate = 40
+RFToSLA_PvPDamageRate = 54					   
+RFToGC_PvPDamageRate = 51			  
+RFToLW_PvPDamageRate = 40
+RFToLM_PvPDamageRate = 41
+RFToIK_PvPDamageRate = 42
+RFToAC_PvPDamageRate = 41
+
+GLToDW_PvPDamageRate = 22
+GLToDK_PvPDamageRate = 24
+GLToELF_PvPDamageRate = 33
+GLToMG_PvPDamageRate = 22
+GLToDL_PvPDamageRate = 25
+GLToSU_PvPDamageRate = 23
+GLToRF_PvPDamageRate = 31
+GLToGL_PvPDamageRate = 24
+GLToRW_PvPDamageRate = 22
+GLToSLA_PvPDamageRate = 33					   
+GLToGC_PvPDamageRate = 30						  
+GLToLW_PvPDamageRate = 22
+GLToLM_PvPDamageRate = 22
+GLToIK_PvPDamageRate = 23
+GLToAC_PvPDamageRate = 22
+
+RWToDW_PvPDamageRate = 31
+RWToDK_PvPDamageRate = 34
+RWToELF_PvPDamageRate = 34
+RWToMG_PvPDamageRate = 31
+RWToDL_PvPDamageRate = 36
+RWToSU_PvPDamageRate = 30
+RWToRF_PvPDamageRate = 32
+RWToGL_PvPDamageRate = 35
+RWToRW_PvPDamageRate = 34
+RWToSLA_PvPDamageRate = 34
+RWToGC_PvPDamageRate = 31					  
+RWToLW_PvPDamageRate = 31
+RWToLM_PvPDamageRate = 32
+RWToIK_PvPDamageRate = 33
+RWToAC_PvPDamageRate = 32
+
+SLAToDW_PvPDamageRate = 37
+SLAToDK_PvPDamageRate = 41
+SLAToELF_PvPDamageRate = 52
+SLAToMG_PvPDamageRate = 38
+SLAToDL_PvPDamageRate = 42
+SLAToSU_PvPDamageRate = 39
+SLAToRF_PvPDamageRate = 49
+SLAToGL_PvPDamageRate = 41
+SLAToRW_PvPDamageRate = 38
+SLAToSLA_PvPDamageRate = 38				   
+SLAToGC_PvPDamageRate = 48				   
+SLAToLW_PvPDamageRate = 38
+SLAToLM_PvPDamageRate = 38
+SLAToIK_PvPDamageRate = 39
+SLAToAC_PvPDamageRate = 38
+
+GCToDW_PvPDamageRate = 32
+GCToDK_PvPDamageRate = 35
+GCToELF_PvPDamageRate = 33
+GCToMG_PvPDamageRate = 32
+GCToDL_PvPDamageRate = 37
+GCToSU_PvPDamageRate = 33
+GCToRF_PvPDamageRate = 42
+GCToGL_PvPDamageRate = 35
+GCToRW_PvPDamageRate = 40
+GCToSLA_PvPDamageRate = 54
+GCToGC_PvPDamageRate = 32
+GCToLW_PvPDamageRate = 32
+GCToLM_PvPDamageRate = 32
+GCToIK_PvPDamageRate = 34
+GCToAC_PvPDamageRate = 33
+
+LWToDW_PvPDamageRate = 23
+LWToDK_PvPDamageRate = 25
+LWToELF_PvPDamageRate = 28
+LWToMG_PvPDamageRate = 23
+LWToDL_PvPDamageRate = 26
+LWToSU_PvPDamageRate = 23
+LWToRF_PvPDamageRate = 32
+LWToGL_PvPDamageRate = 27
+LWToRW_PvPDamageRate = 26
+LWToSLA_PvPDamageRate = 31
+LWToGC_PvPDamageRate = 19
+LWToLW_PvPDamageRate = 23
+LWToLM_PvPDamageRate = 23
+LWToIK_PvPDamageRate = 24
+LWToAC_PvPDamageRate = 25
+
+LMToDW_PvPDamageRate = 29
+LMToDK_PvPDamageRate = 34
+LMToELF_PvPDamageRate = 42
+LMToMG_PvPDamageRate = 31
+LMToDL_PvPDamageRate = 34
+LMToSU_PvPDamageRate = 31
+LMToRF_PvPDamageRate = 40
+LMToGL_PvPDamageRate = 33
+LMToRW_PvPDamageRate = 31
+LMToSLA_PvPDamageRate = 41
+LMToGC_PvPDamageRate = 40
+LMToLW_PvPDamageRate = 31
+LMToLM_PvPDamageRate = 35
+LMToIK_PvPDamageRate = 33
+LMToAC_PvPDamageRate = 32
+
+IKToDW_PvPDamageRate = 32
+IKToDK_PvPDamageRate = 36
+IKToELF_PvPDamageRate = 46
+IKToMG_PvPDamageRate = 33
+IKToDL_PvPDamageRate = 37
+IKToSU_PvPDamageRate = 34
+IKToRF_PvPDamageRate = 43
+IKToGL_PvPDamageRate = 36
+IKToRW_PvPDamageRate = 33
+IKToSLA_PvPDamageRate = 45
+IKToGC_PvPDamageRate = 42
+IKToLW_PvPDamageRate = 33
+IKToLM_PvPDamageRate = 33
+IKToIK_PvPDamageRate = 32
+IKToAC_PvPDamageRate = 34
+
+ACToDW_PvPDamageRate = 27
+ACToDK_PvPDamageRate = 29
+ACToELF_PvPDamageRate = 37
+ACToMG_PvPDamageRate = 27
+ACToDL_PvPDamageRate = 31
+ACToSU_PvPDamageRate = 28
+ACToRF_PvPDamageRate = 36
+ACToGL_PvPDamageRate = 29
+ACToRW_PvPDamageRate = 28
+ACToSLA_PvPDamageRate = 37
+ACToGC_PvPDamageRate = 34
+ACToLW_PvPDamageRate = 27
+ACToLM_PvPDamageRate = 27
+ACToIK_PvPDamageRate = 28
+ACToAC_PvPDamageRate = 28
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final Elemental (PvM) damage so should be configured
+;-- as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, XXPvMDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+DKPvMDamageRate = 100
+DWPvMDamageRate = 100
+ELFPvMDamageRate = 50
+MGPvMDamageRate = 100
+DLPvMDamageRate = 50
+SUMPvMDamageRate = 100
+RFPvMDamageRate = 100
+GLPvMDamageRate = 100
+RWPvMDamageRate = 300
+SLAPvMDamageRate = 150					  
+GCPvMDamageRate = 100				
+LWPvMDamageRate = 25
+LMPvMDamageRate = 100
+IKPvMDamageRate = 100
+ACPvMDamageRate = 100
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Cooldown time of specific options of Radiance Errtel, seconds
+;----------------------------------------------------------------------------------------------~~~~~~
+RadianceBastionCooldown = 120
+RadianceBleedingCooldown = 60
+RadianceParalyzeCooldown = 60
+RadianceBindingCooldown = 60
+RadianceBlindCooldown = 60
+RadiancePunishCooldown = 0
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Whether or not, increase elemental damage by wings attack power increase percent, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+DKElementalDamageIncByWings = 0
+DWElementalDamageIncByWings = 0
+ELFElementalDamageIncByWings = 0
+MGElementalDamageIncByWings = 0
+DLElementalDamageIncByWings = 0
+SUElementalDamageIncByWings = 0
+RFElementalDamageIncByWings = 0
+GLElementalDamageIncByWings = 1
+RWElementalDamageIncByWings = 0
+SLAElementalDamageIncByWings = 0
+GCElementalDamageIncByWings = 0
+LWElementalDamageIncByWings = 0
+LMElementalDamageIncByWings = 0
+IKElementalDamageIncByWings = 0
+ACElementalDamageIncByWings = 0
+
+[ComboDamage]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below options take an effect on final damage of combo skill (PvP) so should be configured
+;-- as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, BMToXX_PvPDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+DKToDW_PvPDamageRate = 69.8
+DKToDK_PvPDamageRate = 75.0
+DKToELF_PvPDamageRate = 69.9
+DKToMG_PvPDamageRate = 69.9
+DKToDL_PvPDamageRate = 69.6
+DKToSU_PvPDamageRate = 69.9
+DKToRF_PvPDamageRate = 69.7
+DKToGL_PvPDamageRate = 70.3
+DKToRW_PvPDamageRate = 69.6
+DKToSLA_PvPDamageRate = 74.9
+DKToGC_PvPDamageRate = 69.9
+DKToLW_PvPDamageRate = 69.9
+DKToLM_PvPDamageRate = 70.0
+DKToIK_PvPDamageRate = 70.0
+DKToAC_PvPDamageRate = 70.0
+
+SLAToDW_PvPDamageRate = 100.8
+SLAToDK_PvPDamageRate = 115.9
+SLAToELF_PvPDamageRate = 99.0
+SLAToMG_PvPDamageRate = 100.9
+SLAToDL_PvPDamageRate = 100.2
+SLAToSU_PvPDamageRate = 99.6
+SLAToRF_PvPDamageRate = 99.0
+SLAToGL_PvPDamageRate = 100
+SLAToRW_PvPDamageRate = 99.0
+SLAToSLA_PvPDamageRate = 101.0
+SLAToGC_PvPDamageRate = 99.4
+SLAToLW_PvPDamageRate = 99.5
+SLAToLM_PvPDamageRate = 100.2
+SLAToIK_PvPDamageRate = 100.0
+SLAToAC_PvPDamageRate = 99.0
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Below option takes an effect on final damage of combo skill (PvM) so should be configured
+;-- as last, after the above or other options which may affect the damage, example:
+;-- Final character damage is 10000, PvMDamageRate = 10, final damage will be then 1000
+;-- All values expressed in percent (float type values)
+;----------------------------------------------------------------------------------------------~~~~~~
+PvMDamageRate = 85
+
+[OptionLimit]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Defines maximum success rate to achieve Excellent Damage, percentage (1-100)
+;----------------------------------------------------------------------------------------------~~~~~~
+MaxExcellentDamageRate = 45
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Defines maximum success rate to achieve Critical Damage, percentage (1-100)
+;----------------------------------------------------------------------------------------------~~~~~~
+MaxCriticalDamageRate = 60
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Defines maximum success rate of Damage Decrease to achieve, percentage (1-100)
+;----------------------------------------------------------------------------------------------~~~~~~
+MaxDamageDecreaseRate = 65
+
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- Defines maximum success rate of Damage Reflect to achieve, percentage (1-100)
+;----------------------------------------------------------------------------------------------~~~~~~
+MaxDamageReflectRate = 45
+MaxShieldProtectionIncreaseRate = 1000
+
+[Options]
+;----------------------------------------------------------------------------------------------~~~~~~
+;-- If enabled the Excellent Defense Success Rate option will affect PvP, 0/1
+;----------------------------------------------------------------------------------------------~~~~~~
+ExcDefenseSuccessRateAffectsPvP = 0
